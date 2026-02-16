@@ -44,10 +44,9 @@
         }
 
         .logo-header {
-            height: 60px;
+            height: 140px;
             width: auto;
-            margin-right: 15px;
-            filter: brightness(0) invert(1);
+            margin-right: 30px;
         }
 
         .card-shadow {
@@ -125,17 +124,17 @@
     <!-- Header -->
     <div class="gradient-bg text-white py-12">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-start">
-                <div>
-                    <div class="flex items-center mb-3">
-                        <img src="logo.png" alt="Tudonum Logo" class="logo-header">
-                        <h1 class="text-5xl font-black">TUDONUM</h1>
+            <div class="flex justify-between items-center gap-8">
+                <div class="flex items-center gap-6 flex-1">
+                    <img src="logo.png" alt="Tudonum Logo" class="logo-header flex-shrink-0">
+                    <div class="flex-1">
+                        <h1 class="text-5xl font-black mb-3">TUDONUM</h1>
+                        <h2 class="text-3xl font-bold mb-2">Product Execution Intelligence Dashboard</h2>
+                        <p class="text-xl opacity-90 mb-3">Strategic Roadmap & Sprint Tracking</p>
+                        <p class="text-sm opacity-75">Authored by <strong>Awais Mazahir</strong> — Chief Product Officer (CPO), Tudonum</p>
                     </div>
-                    <h2 class="text-3xl font-bold mb-2">Product Execution Intelligence Dashboard</h2>
-                    <p class="text-xl opacity-90">20th Ramzan Launch - Strategic Sprint Tracking</p>
-                    <p class="text-sm opacity-75 mt-4">Authored by <strong>Awais Mazahir</strong> — Chief Product Officer (CPO), Tudonum</p>
                 </div>
-                <div class="text-right no-print">
+                <div class="text-right no-print flex-shrink-0">
                     <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
                         <p class="text-sm mb-2">Last Updated</p>
                         <p class="text-2xl font-bold" id="last-updated">Loading...</p>
@@ -191,13 +190,15 @@
         <div class="mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                 <span class="text-4xl">🎯</span>
-                Sprint Tracking (15-Day Launch)
+                <span>Current Sprint: <span id="sprint-title-name">Loading...</span></span>
             </h2>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Sprint Progress</h3>
-                    <canvas id="sprintChart"></canvas>
+                    <div style="max-height: 280px; margin: 0 auto;">
+                        <canvas id="sprintChart"></canvas>
+                    </div>
                     <div class="mt-4 space-y-2" id="sprint-stats"></div>
                 </div>
 
@@ -221,7 +222,9 @@
 
             <div class="mt-6 bg-white rounded-xl p-6 card-shadow">
                 <h3 class="text-xl font-bold text-gray-800 mb-4">Comparative Analysis</h3>
-                <canvas id="repoComparisonChart"></canvas>
+                <div style="max-height: 350px;">
+                    <canvas id="repoComparisonChart"></canvas>
+                </div>
             </div>
         </div>
 
@@ -301,12 +304,16 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Overall Progress</h3>
-                    <canvas id="overallProgressChart"></canvas>
+                    <div style="max-height: 300px; margin: 0 auto;">
+                        <canvas id="overallProgressChart"></canvas>
+                    </div>
                 </div>
 
                 <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Weekly Velocity</h3>
-                    <canvas id="velocityChart"></canvas>
+                    <div style="max-height: 300px;">
+                        <canvas id="velocityChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -324,19 +331,25 @@
     </footer>
 
     <script>
+        // Embedded data for local file:// protocol support
+        const EMBEDDED_DATA = {"meta":{"generated_at":"2026-02-17T01:30:00Z","author":"Awais Mazahir","title":"Chief Product Officer (CPO), Tudonum","dashboard_version":"1.0.0"},"current_sprint":{"name":"20th Ramzan Launch","start_date":"2026-02-04","end_date":"2026-02-20","days_remaining":13,"total_days":15},"executive_summary":{"strategic_completion":28,"sprint_completion":35,"launch_readiness":"MEDIUM RISK","confidence_level":"Medium","status_color":"warning","headline":"Backend production-ready (78%). Web app strong (72%). Mobile apps need 4-5 weeks more work."},"sprint_tracking":{"total_tasks":63,"completed":22,"in_progress":18,"pending":23,"completion_percentage":35,"on_track":false,"risk_assessment":"Mobile development completely stalled. Backend/web on track.","critical_path":["Complete Professional Services booking flow","Complete Food Delivery ordering flow","Build Ride Hailing system from scratch","Merge Admin Dashboard","Integrate 8+ AI features","Resume Android & iOS development immediately"]},"strategic_roadmap":{"total_phases":6,"phases_in_progress":2,"phases_completed":1,"completion_percentage":28,"modules":{"infrastructure":{"status":"completed","progress":100,"notes":"Django backend, PostgreSQL + PostGIS, Docker setup complete"},"professional_services":{"status":"in_progress","progress":80,"notes":"Backend complete. Frontend booking flow pending. New packages feature added."},"food_delivery":{"status":"in_progress","progress":60,"notes":"Backend models exist. Frontend ordering flow incomplete."},"ride_hailing":{"status":"not_started","progress":0,"notes":"New vertical. Needs complete implementation."},"wallet_payments":{"status":"blocked","progress":100,"notes":"Feature complete but DEACTIVATED awaiting compliance/licensing approval"},"admin_dashboard":{"status":"in_progress","progress":50,"notes":"Auth system active development. Needs merge into main web app."},"ai_features":{"status":"in_progress","progress":20,"notes":"OpenAI client ready. 8+ features need implementation."},"mobile_apps":{"status":"stalled","progress":15,"notes":"Android paused 27 days. iOS essentially not started (2 commits only)."}}},"repository_performance":{"tudonum_backend":{"commits_last_2_weeks":6,"total_commits":795,"total_files":570,"lines_of_code":28800,"api_endpoints":217,"status":"active","health":"excellent","progress":78,"velocity":"high","last_commit":"2 days ago","key_work":["217 API endpoints (23 Django apps)","Food Delivery 85% complete","Professional Services 80% complete","Multi-currency wallet (4 currencies)"],"team_members":8,"branches_active":4},"tudonum_web_app":{"commits_last_2_weeks":2,"total_commits":657,"total_files":1007,"lines_of_code":50305,"components":353,"status":"moderate","health":"good","progress":72,"velocity":"medium","last_commit":"6 days ago","key_work":["353 React components built","86 pages/routes implemented","Food & Services UI 75% complete","Testing framework configured"],"team_members":7,"branches_active":30},"tudonum_admin_dashboard":{"commits_last_2_weeks":6,"total_commits":10,"total_files":252,"lines_of_code":19995,"pages":62,"status":"active","health":"good","progress":65,"velocity":"high","last_commit":"4 days ago","key_work":["62 admin pages implemented","User/Provider/Order management 70%","Analytics dashboard 60%","Auth system complete"],"team_members":3,"branches_active":3},"tudonum_ios_app":{"commits_last_2_weeks":0,"total_commits":2,"total_files":233,"lines_of_code":29398,"screens":30,"status":"stagnant","health":"warning","progress":45,"velocity":"stopped","last_commit":"18 days ago","key_work":["233 Swift files (29K LOC)","30+ screens with UIKit","Booking/Payment flows 60-70%","Real-time features missing"],"team_members":1,"branches_active":1},"tudonum_android_app":{"commits_last_2_weeks":0,"total_commits":100,"total_files":129,"lines_of_code":7968,"packages":8,"status":"dead","health":"critical","progress":40,"velocity":"stopped","last_commit":"27 days ago","key_work":["Only 129 files (8K LOC)","Basic package structure","Minimal working features","Architecture incomplete"],"team_members":6,"branches_active":3}},"this_week_completed":[{"date":"Feb 16","repo":"Backend","achievement":"SMTP configuration updates and testing utilities"},{"date":"Feb 13","repo":"Admin Dashboard","achievement":"Auth refresh mechanism with useAuthRefresh hook"},{"date":"Feb 12-13","repo":"Backend","achievement":"Docker containerization with automated data seeding"},{"date":"Feb 11","repo":"Backend & Web","achievement":"Service Packages feature - synced implementation across both repos"},{"note":"Wallet System","status":"Deactivated awaiting compliance/licensing approval (per update_notes.md)"}],"next_7_days_plan":[{"priority":"P0","task":"URGENT: Resume Android app development - assign dedicated developer","owner":"Engineering Lead","days":"1-2"},{"priority":"P0","task":"URGENT: Make iOS development decision - start or deprioritize","owner":"CTO","days":"1"},{"priority":"P0","task":"Complete Professional Services booking flow (frontend)","owner":"Dev 2","days":"3-4"},{"priority":"P0","task":"Complete Food Delivery ordering flow","owner":"Dev 3","days":"4-5"},{"priority":"P0","task":"Begin Ride Hailing system implementation","owner":"Dev 4","days":"5-7"},{"priority":"P1","task":"Merge Admin Dashboard into main web app","owner":"Dev 2","days":"3-4"},{"priority":"P1","task":"Resolve Wallet compliance issues and reactivate","owner":"CPO + Legal","days":"Ongoing"},{"priority":"P1","task":"Integrate first 4 AI features across verticals","owner":"All Devs","days":"5-7"}],"blockers_and_risks":[{"severity":"critical","category":"Mobile Development","issue":"Android app completely stalled for 27 days","impact":"Cannot launch without mobile apps. 20th Ramzan target in jeopardy.","mitigation":"Immediately assign developer to Android. Daily check-ins required."},{"severity":"critical","category":"Mobile Development","issue":"iOS app has only 2 commits - development not started","impact":"iOS market completely unserved. Brand perception risk.","mitigation":"Make GO/NO-GO decision on iOS within 24 hours. If GO, hire iOS developer immediately."},{"severity":"high","category":"Compliance","issue":"Wallet system deactivated awaiting licensing approval","impact":"Payments across all verticals blocked. Cannot monetize.","mitigation":"Escalate to legal team. Explore alternative payment integrations (Stripe direct)."},{"severity":"high","category":"Feature Completion","issue":"Ride Hailing is 0% complete - needs full build","impact":"One of three core verticals missing. Launch scope incomplete.","mitigation":"Consider MVP approach: Standard ride type only. No Premium/Shared for v1."},{"severity":"medium","category":"Integration","issue":"Admin Dashboard separate from main web app","impact":"Deployment complexity. User experience fragmentation.","mitigation":"Week 2 merge planned (Dev 2). Must complete on schedule."},{"severity":"medium","category":"AI Features","issue":"Only infrastructure ready - 8+ features not implemented","impact":"Key differentiator missing. Marketing promise unfulfilled.","mitigation":"Prioritize 4 highest-impact AI features. Defer rest to post-launch."},{"severity":"low","category":"Technical Debt","issue":"30+ feature branches in web app not merged","impact":"Code organization and merge conflicts potential.","mitigation":"Scheduled cleanup sprint post-launch."}],"leadership_insights":{"product":{"role":"CPO","insight":"Our backend foundation is rock-solid, and the Packages feature demonstrates our velocity when teams are aligned. However, mobile stagnation is existential - we cannot launch a modern platform without native apps. The next 48 hours are critical: we must decide iOS strategy and restart Android immediately. Wallet compliance is our second-highest priority - without monetization, we have a demo, not a business."},"technology":{"role":"CTO","insight":"Backend and admin dashboard are executing well with Docker containerization complete and auth systems robust. The 30+ web app branches signal good experimentation but require consolidation. Critical gap: mobile engineering capacity. We need either to reassign existing engineers or bring in contractors for Android/iOS sprint. Recommend MVP scope reduction on Ride Hailing to improve launch probability."},"engineering":{"role":"Engineering Lead","insight":"Team velocity on backend is strong (6 commits/week), but mobile silence is alarming. Android has the foundation (100 commits) - we just need resourcing. iOS is a greenfield problem requiring strategic decision. The Packages feature sync between backend/frontend proves our integration workflow works. Focus areas: 1) Mobile resourcing NOW, 2) AI feature prioritization (implement 4, defer 4), 3) Admin dashboard merge must not slip."}},"charts_data":{"overall_progress_donut":{"completed":28,"remaining":72},"repo_comparison":[{"name":"Backend","progress":78,"status":"excellent"},{"name":"Web App","progress":72,"status":"good"},{"name":"Admin","progress":65,"status":"good"},{"name":"iOS","progress":45,"status":"warning"},{"name":"Android","progress":40,"status":"critical"}],"sprint_velocity":[{"week":"Week 1","commits":8,"features":2},{"week":"Week 2","commits":14,"features":3},{"week":"Week 3 (Current)","commits":6,"features":1}],"sprint_burndown":{"total_story_points":210,"completed":73,"remaining":137,"ideal_remaining":97}},"key_metrics":{"total_commits_all_repos":1564,"active_developers":25,"lines_of_code":"~180,000","api_endpoints":"120+","countries_supported":5,"verticals_live":1,"verticals_in_progress":2,"verticals_not_started":1}};
+
         let dashboardData = null;
 
         // Load data and initialize dashboard
         async function loadDashboard() {
             try {
+                // Try loading from external file first (for GitHub Pages)
                 const response = await fetch('dashboard_data.json');
+                if (!response.ok) throw new Error('Failed to fetch');
                 dashboardData = await response.json();
-
-                renderDashboard();
+                console.log('Loaded from external JSON file');
             } catch (error) {
-                console.error('Error loading dashboard data:', error);
-                alert('Error loading dashboard data. Please ensure dashboard_data.json is available.');
+                // Fallback to embedded data (for local file:// protocol)
+                console.log('Using embedded data for local file system');
+                dashboardData = EMBEDDED_DATA;
             }
+            renderDashboard();
         }
 
         function renderDashboard() {
@@ -365,29 +378,33 @@
 
         function renderExecutiveSummary() {
             const summary = dashboardData.executive_summary;
-            const meta = dashboardData.meta;
+            const sprint = dashboardData.current_sprint;
 
             const cards = [
                 {
-                    title: 'Overall Completion',
-                    value: `${summary.overall_completion}%`,
+                    title: 'Strategic Progress',
+                    subtitle: '(vs Comprehensive Booklet)',
+                    value: `${summary.strategic_completion}%`,
                     icon: '🎯',
                     color: 'from-blue-500 to-blue-600'
                 },
                 {
-                    title: 'Sprint Progress',
+                    title: 'Current Sprint',
+                    subtitle: sprint.name,
                     value: `${summary.sprint_completion}%`,
                     icon: '⚡',
                     color: 'from-blue-600 to-blue-700'
                 },
                 {
-                    title: 'Days Remaining',
-                    value: meta.days_remaining,
+                    title: 'Sprint Days Left',
+                    subtitle: `${sprint.total_days}-Day Sprint`,
+                    value: sprint.days_remaining,
                     icon: '⏰',
                     color: 'from-orange-500 to-orange-600'
                 },
                 {
                     title: 'Launch Readiness',
+                    subtitle: summary.confidence_level + ' Confidence',
                     value: summary.launch_readiness,
                     icon: '🚀',
                     color: summary.status_color === 'warning' ? 'from-yellow-500 to-orange-500' : 'from-green-500 to-green-600'
@@ -396,11 +413,12 @@
 
             const cardsHTML = cards.map(card => `
                 <div class="bg-gradient-to-br ${card.color} rounded-xl p-6 text-white card-shadow">
-                    <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center justify-between mb-3">
                         <span class="text-4xl">${card.icon}</span>
                         <span class="text-5xl font-black opacity-20">↗</span>
                     </div>
-                    <p class="text-sm opacity-90 mb-1">${card.title}</p>
+                    <p class="text-sm font-semibold opacity-90 mb-1">${card.title}</p>
+                    ${card.subtitle ? `<p class="text-xs opacity-75 mb-2">${card.subtitle}</p>` : ''}
                     <p class="text-3xl font-black">${card.value}</p>
                 </div>
             `).join('');
@@ -411,6 +429,10 @@
 
         function renderSprintTracking() {
             const sprint = dashboardData.sprint_tracking;
+            const currentSprint = dashboardData.current_sprint;
+
+            // Update sprint title
+            document.getElementById('sprint-title-name').textContent = `${currentSprint.name} (${currentSprint.total_days}-Day Sprint)`;
 
             // Sprint statistics
             const statsHTML = `
@@ -458,10 +480,17 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'bottom'
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 10,
+                                font: {
+                                    size: 11
+                                }
+                            }
                         }
                     }
                 }
@@ -564,7 +593,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true,
@@ -572,6 +601,16 @@
                             ticks: {
                                 callback: function(value) {
                                     return value + '%';
+                                },
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 11
                                 }
                             }
                         }
@@ -759,10 +798,17 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'bottom'
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 10,
+                                font: {
+                                    size: 11
+                                }
+                            }
                         }
                     }
                 }
@@ -796,15 +842,34 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 11
+                                }
+                            }
                         }
                     },
                     plugins: {
                         legend: {
-                            position: 'bottom'
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 10,
+                                font: {
+                                    size: 11
+                                }
+                            }
                         }
                     }
                 }
@@ -855,11 +920,11 @@
             pdf.setFont(undefined, 'normal');
             let yPos = 35;
 
-            pdf.text(`Overall Completion: ${dashboardData.executive_summary.overall_completion}%`, 20, yPos);
+            pdf.text(`Strategic Progress (vs Comprehensive Booklet): ${dashboardData.executive_summary.strategic_completion}%`, 20, yPos);
             yPos += 10;
-            pdf.text(`Sprint Completion: ${dashboardData.executive_summary.sprint_completion}%`, 20, yPos);
+            pdf.text(`Current Sprint (${dashboardData.current_sprint.name}): ${dashboardData.executive_summary.sprint_completion}%`, 20, yPos);
             yPos += 10;
-            pdf.text(`Days Remaining: ${dashboardData.meta.days_remaining}`, 20, yPos);
+            pdf.text(`Sprint Days Remaining: ${dashboardData.current_sprint.days_remaining} of ${dashboardData.current_sprint.total_days}`, 20, yPos);
             yPos += 10;
             pdf.text(`Launch Readiness: ${dashboardData.executive_summary.launch_readiness}`, 20, yPos);
             yPos += 15;
