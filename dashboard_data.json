@@ -187,6 +187,125 @@
       "branches_active": 3
     }
   },
+  "future_plans": [
+    {
+      "category": "Phase 2: Market Expansion (2026-2027)",
+      "timeline": "2026-2027",
+      "icon": "🌍",
+      "priority": "High",
+      "features": [
+        "Sprint-3+ service categories activation (26+ total categories)",
+        "Qatar and UAE market entry",
+        "Tudo Coin on-chain deployment (Q4 2026) - ERC-20 on Polygon/Base L2",
+        "Credit & BNPL system rollout",
+        "Multi-country regulatory compliance (EU GDPR, MiCA, GCC SCA)"
+      ]
+    },
+    {
+      "category": "Tudo Wallet & Financial OS",
+      "timeline": "2026-2027",
+      "icon": "💳",
+      "priority": "High",
+      "features": [
+        "Multi-ledger architecture (Fiat, Tudo Points, Tudo Coins, Crypto, Escrow, Credit)",
+        "AI-based financial intelligence (Trust, Reliability, Credit, Corridor Risk scores)",
+        "Global remittance engine & FX platform",
+        "Unified checkout with AI-driven asset optimization",
+        "KYC/AML tiering system (Tier 0-3)"
+      ]
+    },
+    {
+      "category": "TudoVerse - Virtual Countries",
+      "timeline": "2027-2028",
+      "icon": "🏢",
+      "priority": "High",
+      "features": [
+        "Phase 2: Economic zones, Government desks, Investor floors",
+        "Sector buildings for all 13 service groups",
+        "Virtual office subscriptions ($49-$299/month)",
+        "Real-time business meetings and service bookings",
+        "Phase 3 (2028+): Public spaces, AR/VR immersion, Virtual expos"
+      ]
+    },
+    {
+      "category": "Communication & Social Platform",
+      "timeline": "2026-2027",
+      "icon": "💬",
+      "priority": "Medium",
+      "features": [
+        "Tudo Chat: Business messaging with payments, appointments, AI assistant",
+        "Tudo Social: Posts, Reels, Stories, Live Streaming with 'Book Now' integration",
+        "Fame Connect: Celebrity interactions ($10-$5,000) with 70-80% revenue share",
+        "Content monetization with Tudo Coin tipping",
+        "Tudo Browser: AI-powered web browser with shopping assistant"
+      ]
+    },
+    {
+      "category": "Phase 3: Maturity & AI Excellence (2027-2028)",
+      "timeline": "2027-2028",
+      "icon": "🤖",
+      "priority": "High",
+      "features": [
+        "Full 26+ service categories operational across all markets",
+        "Saudi Arabia market entry",
+        "AI Module Marketplace (Pricing AI, Marketing AI, Operations AI, Smart City AI)",
+        "Advanced Tudo AI Assistant (ChatGPT-level, 10+ languages, multi-modal)",
+        "Tudo ERP & CRM SaaS expansion ($89-$999/month tiers)"
+      ]
+    },
+    {
+      "category": "Marketplace & Trading Platform",
+      "timeline": "2027",
+      "icon": "📊",
+      "priority": "Medium",
+      "features": [
+        "Classifieds: Vehicles (EV-focus), Real Estate, Hotel & Travel, Matrimonial",
+        "Stock Trading Platform with AI Trading Assistant",
+        "Jobs & Recruitment marketplace with AI-powered matching",
+        "Cryptocurrency trading integration",
+        "Digital resume builder and employer branding tools"
+      ]
+    },
+    {
+      "category": "Infrastructure & EV Fleet Expansion",
+      "timeline": "2026-2028",
+      "icon": "⚡",
+      "priority": "High",
+      "features": [
+        "Pakistan: 80% EV, 20% hybrid fleet deployment",
+        "GCC & Europe: 100% EV fleet",
+        "Charging infrastructure & battery optimization",
+        "Carbon-aware routing algorithms",
+        "AI Data Center expansion (Oman primary, regional redundancy)"
+      ]
+    },
+    {
+      "category": "Phase 4: Innovation Layer (2028+)",
+      "timeline": "2028+",
+      "icon": "🚀",
+      "priority": "Medium",
+      "features": [
+        "Digital Hospital Ecosystem (4-phase medical services roadmap)",
+        "Digital Educational Excellence platform",
+        "TudoVerse public spaces & virtual trade shows",
+        "Developer Ecosystem & API Platform with revenue sharing",
+        "White-label Tudo AI for enterprises & governments"
+      ]
+    },
+    {
+      "category": "ESG & Sustainability",
+      "timeline": "2026-2028",
+      "icon": "🌱",
+      "priority": "Medium",
+      "features": [
+        "Green AI data centers (Solar + Wind power)",
+        "Carbon-aware operations & Net Zero alignment",
+        "Vision 2040 (Oman) & Net Zero 2050 (EU, GCC) compliance",
+        "CO₂ reduction tracking per booking",
+        "Smart City integration (Traffic, mobility, employment analytics)"
+      ]
+    }
+  ],
   "this_week_completed": [
     {
       "date": "Feb 16",
