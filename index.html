@@ -186,14 +186,15 @@
             </div>
         </div>
 
-        <!-- Sprint Tracking -->
+        <!-- Sprint Tracking & Leadership Voices -->
         <div class="mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                 <span class="text-4xl">🎯</span>
                 <span>Current Sprint: <span id="sprint-title-name">Loading...</span></span>
             </h2>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Sprint Progress (1/3) -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Sprint Progress</h3>
                     <div style="max-height: 280px; margin: 0 auto;">
@@ -202,9 +203,21 @@
                     <div class="mt-4 space-y-2" id="sprint-stats"></div>
                 </div>
 
+                <!-- Critical Path Items (1/3) -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Critical Path Items</h3>
-                    <div class="space-y-3" id="critical-path"></div>
+                    <div class="space-y-3 overflow-y-auto" style="max-height: 500px;" id="critical-path"></div>
+                </div>
+
+                <!-- Leadership Voices (1/3) -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🎤</span>
+                        Leadership Voices
+                    </h3>
+                    <div class="space-y-4 overflow-y-auto" style="max-height: 500px;" id="leadership-insights-compact">
+                        <!-- Compact leadership insights will be inserted here -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -216,14 +229,24 @@
                 Repository & Team Performance
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="repo-cards">
-                <!-- Repository cards will be dynamically inserted -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Repository cards container -->
+                <div id="repo-cards" class="contents">
+                    <!-- Repository cards will be dynamically inserted -->
+                </div>
 
-            <div class="mt-6 bg-white rounded-xl p-6 card-shadow">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Comparative Analysis</h3>
-                <div style="max-height: 350px;">
-                    <canvas id="repoComparisonChart"></canvas>
+                <!-- Comparative Analysis as 6th widget -->
+                <div class="repo-card bg-white rounded-xl p-6 card-shadow">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">COMPARATIVE ANALYSIS</h3>
+                            <p class="text-sm text-gray-500">Progress across all repos</p>
+                        </div>
+                        <span class="text-3xl">📊</span>
+                    </div>
+                    <div style="height: 320px;">
+                        <canvas id="repoComparisonChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,6 +265,51 @@
             </div>
         </div>
 
+        <!-- Engineering Team Updates -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🛠️</span>
+                Engineering Team Updates
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- This Week Completed -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span class="text-2xl">✅</span>
+                        This Week Completed
+                    </h3>
+                    <div class="space-y-3 overflow-y-auto" style="max-height: 450px;" id="week-completed">
+                        <!-- Completed items will be dynamically inserted -->
+                    </div>
+                </div>
+
+                <!-- Next 7 Days Plan -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📅</span>
+                        Next 7 Days Plan
+                    </h3>
+                    <div class="space-y-3 overflow-y-auto" style="max-height: 450px;" id="next-week-plan">
+                        <!-- Plan items will be dynamically inserted -->
+                    </div>
+                </div>
+
+                <!-- Blockers & Risks -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span>
+                        Blockers & Risks
+                    </h3>
+                    <div class="space-y-3 overflow-y-auto" style="max-height: 450px;" id="blockers-list">
+                        <!-- Blocker cards will be dynamically inserted -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Future Plans -->
         <div class="mb-12">
             <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
@@ -254,81 +322,6 @@
             </div>
         </div>
 
-        <!-- This Week Completed -->
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                <span class="text-4xl">✅</span>
-                This Week Completed
-            </h2>
-
-            <div class="bg-white rounded-xl p-6 card-shadow">
-                <div class="space-y-4" id="week-completed">
-                    <!-- Completed items will be dynamically inserted -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Next 7 Days Plan -->
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                <span class="text-4xl">📅</span>
-                Next 7 Days Plan
-            </h2>
-
-            <div class="bg-white rounded-xl p-6 card-shadow">
-                <div class="space-y-4" id="next-week-plan">
-                    <!-- Plan items will be dynamically inserted -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Blockers & Risks -->
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                <span class="text-4xl">🚨</span>
-                Blockers & Risks
-            </h2>
-
-            <div class="space-y-4" id="blockers-list">
-                <!-- Blocker cards will be dynamically inserted -->
-            </div>
-        </div>
-
-        <!-- Leadership Insights -->
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                <span class="text-4xl">🎤</span>
-                Leadership Voices
-            </h2>
-
-            <div class="space-y-6" id="leadership-insights">
-                <!-- Insight cards will be dynamically inserted -->
-            </div>
-        </div>
-
-        <!-- Charts Section -->
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                <span class="text-4xl">📈</span>
-                Analytics & Trends
-            </h2>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-white rounded-xl p-6 card-shadow">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Overall Progress</h3>
-                    <div style="max-height: 300px; margin: 0 auto;">
-                        <canvas id="overallProgressChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 card-shadow">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Weekly Velocity</h3>
-                    <div style="max-height: 300px;">
-                        <canvas id="velocityChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 
@@ -584,7 +577,7 @@
 
             document.getElementById('repo-cards').innerHTML = cardsHTML;
 
-            // Repository comparison chart
+            // Repository comparison chart (horizontal bars)
             const chartData = dashboardData.charts_data.repo_comparison;
             const ctx = document.getElementById('repoComparisonChart');
             new Chart(ctx, {
@@ -600,15 +593,16 @@
                             if (r.status === 'warning') return '#f59e0b';
                             return '#ef4444';
                         }),
-                        borderRadius: 8,
+                        borderRadius: 6,
                         borderWidth: 0
                     }]
                 },
                 options: {
+                    indexAxis: 'y', // This makes the bar chart horizontal
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: {
+                        x: {
                             beginAtZero: true,
                             max: 100,
                             ticks: {
@@ -616,21 +610,35 @@
                                     return value + '%';
                                 },
                                 font: {
-                                    size: 11
+                                    size: 10
                                 }
+                            },
+                            grid: {
+                                color: '#f3f4f6'
                             }
                         },
-                        x: {
+                        y: {
                             ticks: {
                                 font: {
-                                    size: 11
+                                    size: 11,
+                                    weight: '600'
                                 }
+                            },
+                            grid: {
+                                display: false
                             }
                         }
                     },
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Progress: ' + context.parsed.x + '%';
+                                }
+                            }
                         }
                     }
                 }
@@ -721,13 +729,10 @@
             const completed = dashboardData.this_week_completed;
 
             const html = completed.map(item => `
-                <div class="flex items-start gap-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-lg">
-                    <span class="text-2xl">✅</span>
-                    <div class="flex-1">
-                        ${item.date ? `<p class="text-sm font-semibold text-green-800 mb-1">${item.date} - ${item.repo}</p>` : ''}
-                        <p class="text-gray-700">${item.achievement || item.note}</p>
-                        ${item.status ? `<p class="text-sm text-orange-600 font-semibold mt-1">Status: ${item.status}</p>` : ''}
-                    </div>
+                <div class="p-3 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                    ${item.date ? `<p class="text-xs font-bold text-green-800 mb-1">${item.date} - ${item.repo}</p>` : ''}
+                    <p class="text-xs text-gray-700">${item.achievement || item.note}</p>
+                    ${item.status ? `<p class="text-xs text-orange-600 font-semibold mt-1">${item.status}</p>` : ''}
                 </div>
             `).join('');
 
@@ -739,23 +744,21 @@
 
             const getPriorityColor = (priority) => {
                 const colors = {
-                    'P0': 'bg-red-100 text-red-800 border-red-300',
-                    'P1': 'bg-orange-100 text-orange-800 border-orange-300',
-                    'P2': 'bg-blue-100 text-blue-800 border-blue-300'
+                    'P0': 'bg-red-100 text-red-800',
+                    'P1': 'bg-orange-100 text-orange-800',
+                    'P2': 'bg-blue-100 text-blue-800'
                 };
                 return colors[priority] || 'bg-gray-100 text-gray-800';
             };
 
             const html = plan.map(item => `
-                <div class="flex items-start gap-4 p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-blue-300 transition">
-                    <span class="status-badge ${getPriorityColor(item.priority)}">${item.priority}</span>
-                    <div class="flex-1">
-                        <p class="font-semibold text-gray-800 mb-1">${item.task}</p>
-                        <div class="flex gap-4 text-sm text-gray-600">
-                            <span>👤 ${item.owner}</span>
-                            <span>📅 Days ${item.days}</span>
-                        </div>
+                <div class="p-3 bg-gray-50 border-l-4 border-blue-500 rounded-lg">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="px-2 py-0.5 text-xs font-bold rounded ${getPriorityColor(item.priority)}">${item.priority}</span>
+                        <span class="text-xs text-gray-500">Days ${item.days}</span>
                     </div>
+                    <p class="text-xs font-semibold text-gray-800 mb-1">${item.task}</p>
+                    <p class="text-xs text-gray-600">👤 ${item.owner}</p>
                 </div>
             `).join('');
 
@@ -767,39 +770,33 @@
 
             const getSeverityColor = (severity) => {
                 const colors = {
-                    'critical': 'border-red-500 bg-red-50',
-                    'high': 'border-orange-500 bg-orange-50',
-                    'medium': 'border-yellow-500 bg-yellow-50',
-                    'low': 'border-blue-500 bg-blue-50'
+                    'critical': 'border-red-500',
+                    'high': 'border-orange-500',
+                    'medium': 'border-yellow-500',
+                    'low': 'border-blue-500'
                 };
-                return colors[severity] || 'border-gray-500 bg-gray-50';
+                return colors[severity] || 'border-gray-500';
             };
 
             const getSeverityBadge = (severity) => {
                 const badges = {
-                    'critical': 'badge-critical',
-                    'high': 'badge-high',
-                    'medium': 'badge-medium',
-                    'low': 'badge-low'
+                    'critical': 'bg-red-100 text-red-800',
+                    'high': 'bg-orange-100 text-orange-800',
+                    'medium': 'bg-yellow-100 text-yellow-800',
+                    'low': 'bg-blue-100 text-blue-800'
                 };
-                return badges[severity] || 'badge-medium';
+                return badges[severity] || 'bg-gray-100 text-gray-800';
             };
 
             const html = blockers.map(blocker => `
-                <div class="border-l-4 ${getSeverityColor(blocker.severity)} rounded-lg p-6 card-shadow">
-                    <div class="flex items-start justify-between mb-3">
-                        <div>
-                            <span class="status-badge ${getSeverityBadge(blocker.severity)} mb-2">${blocker.severity.toUpperCase()}</span>
-                            <h4 class="text-lg font-bold text-gray-800 mt-2">${blocker.category}</h4>
-                        </div>
-                        <span class="text-3xl">${blocker.severity === 'critical' ? '🚨' : blocker.severity === 'high' ? '⚠️' : '📌'}</span>
+                <div class="border-l-4 ${getSeverityColor(blocker.severity)} bg-gray-50 rounded-lg p-3">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-0.5 text-xs font-bold rounded ${getSeverityBadge(blocker.severity)}">${blocker.severity.toUpperCase()}</span>
+                        <span class="text-lg">${blocker.severity === 'critical' ? '🚨' : blocker.severity === 'high' ? '⚠️' : '📌'}</span>
                     </div>
-                    <p class="text-gray-700 font-semibold mb-2">Issue: ${blocker.issue}</p>
-                    <p class="text-gray-600 mb-3"><strong>Impact:</strong> ${blocker.impact}</p>
-                    <div class="p-3 bg-white rounded-lg border border-gray-200">
-                        <p class="text-sm font-semibold text-green-700 mb-1">✓ Mitigation Plan:</p>
-                        <p class="text-sm text-gray-700">${blocker.mitigation}</p>
-                    </div>
+                    <p class="text-xs font-bold text-gray-800 mb-1">${blocker.category}</p>
+                    <p class="text-xs text-gray-700 mb-2">${blocker.issue}</p>
+                    <p class="text-xs text-green-700"><strong>Fix:</strong> ${blocker.mitigation}</p>
                 </div>
             `).join('');
 
@@ -810,121 +807,32 @@
             const insights = dashboardData.leadership_insights;
 
             const insightTypes = [
-                { key: 'product', icon: '🎯', color: 'insight-product' },
-                { key: 'technology', icon: '⚙️', color: 'insight-technology' },
-                { key: 'engineering', icon: '🔧', color: 'insight-engineering' }
+                { key: 'product', icon: '🎯', color: 'border-blue-500' },
+                { key: 'technology', icon: '⚙️', color: 'border-blue-600' },
+                { key: 'engineering', icon: '🔧', color: 'border-green-500' }
             ];
 
             const html = insightTypes.map(type => {
                 const insight = insights[type.key];
+                // Truncate to first 2 sentences for compact view
+                const shortInsight = insight.insight.split('. ').slice(0, 2).join('. ') + (insight.insight.split('. ').length > 2 ? '.' : '');
                 return `
-                    <div class="insight-card ${type.color} bg-white rounded-xl p-6 card-shadow">
-                        <div class="flex items-start gap-4">
-                            <span class="text-4xl">${type.icon}</span>
-                            <div class="flex-1">
-                                <h4 class="text-xl font-bold text-gray-800 mb-2">${insight.role}</h4>
-                                <p class="text-gray-700 leading-relaxed">${insight.insight}</p>
-                            </div>
+                    <div class="border-l-4 ${type.color} bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xl">${type.icon}</span>
+                            <h4 class="text-sm font-bold text-gray-800">${insight.role}</h4>
                         </div>
+                        <p class="text-xs text-gray-700 leading-relaxed">${shortInsight}</p>
                     </div>
                 `;
             }).join('');
 
-            document.getElementById('leadership-insights').innerHTML = html;
+            document.getElementById('leadership-insights-compact').innerHTML = html;
         }
 
         function renderCharts() {
-            // Overall Progress Chart
-            const overallData = dashboardData.charts_data.overall_progress_donut;
-            const ctx1 = document.getElementById('overallProgressChart');
-            new Chart(ctx1, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Completed', 'Remaining'],
-                    datasets: [{
-                        data: [overallData.completed, overallData.remaining],
-                        backgroundColor: ['#2563EB', '#e5e7eb'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                boxWidth: 12,
-                                padding: 10,
-                                font: {
-                                    size: 11
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Velocity Chart
-            const velocityData = dashboardData.charts_data.sprint_velocity;
-            const ctx2 = document.getElementById('velocityChart');
-            new Chart(ctx2, {
-                type: 'line',
-                data: {
-                    labels: velocityData.map(v => v.week),
-                    datasets: [
-                        {
-                            label: 'Commits',
-                            data: velocityData.map(v => v.commits),
-                            borderColor: '#2563EB',
-                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                            tension: 0.4,
-                            fill: true
-                        },
-                        {
-                            label: 'Features',
-                            data: velocityData.map(v => v.features),
-                            borderColor: '#10b981',
-                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                            tension: 0.4,
-                            fill: true
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                font: {
-                                    size: 11
-                                }
-                            }
-                        },
-                        x: {
-                            ticks: {
-                                font: {
-                                    size: 11
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                boxWidth: 12,
-                                padding: 10,
-                                font: {
-                                    size: 11
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+            // Charts removed - Analytics & Trends section deleted per user request
+            // Only Sprint chart and Comparative Analysis chart remain in other sections
         }
 
         // Export to PDF
