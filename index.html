@@ -1,12 +1,881 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tudonum Progress Dashboard</title>
-  </head>
-  <body style="font-family: Arial, sans-serif; padding: 24px;">
-    <h1>Tudonum Product Execution Dashboard</h1>
-    <p>Authored by Awais Mazahir — Chief Product Officer (CPO), Tudonum</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudonum Product Execution Dashboard - CPO Intelligence</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- jsPDF for PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- html2canvas for capturing dashboard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #1e40af 100%);
+        }
+
+        .gradient-success {
+            background: linear-gradient(135deg, #2563EB 0%, #1e40af 100%);
+        }
+
+        .gradient-warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+        }
+
+        .gradient-danger {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+        }
+
+        .logo-header {
+            height: 60px;
+            width: auto;
+            margin-right: 15px;
+            filter: brightness(0) invert(1);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 1s ease-in-out;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .badge-critical {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-high {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-medium {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-low {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .repo-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .insight-card {
+            border-left: 4px solid;
+            padding-left: 1.5rem;
+        }
+
+        .insight-product {
+            border-color: #2563EB;
+        }
+
+        .insight-technology {
+            border-color: #3b82f6;
+        }
+
+        .insight-engineering {
+            border-color: #10b981;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <div class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-start">
+                <div>
+                    <div class="flex items-center mb-3">
+                        <img src="logo.png" alt="Tudonum Logo" class="logo-header">
+                        <h1 class="text-5xl font-black">TUDONUM</h1>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2">Product Execution Intelligence Dashboard</h2>
+                    <p class="text-xl opacity-90">20th Ramzan Launch - Strategic Sprint Tracking</p>
+                    <p class="text-sm opacity-75 mt-4">Authored by <strong>Awais Mazahir</strong> — Chief Product Officer (CPO), Tudonum</p>
+                </div>
+                <div class="text-right no-print">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                        <p class="text-sm mb-2">Last Updated</p>
+                        <p class="text-2xl font-bold" id="last-updated">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Buttons -->
+    <div class="container mx-auto px-4 -mt-6 mb-8 no-print">
+        <div class="flex gap-4 justify-end">
+            <button onclick="exportToPDF()" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Download PDF
+            </button>
+            <button onclick="window.print()" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                Print Report
+            </button>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 pb-16">
+
+        <!-- Executive Summary -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">📊</span>
+                Executive Summary
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="executive-cards">
+                <!-- Cards will be dynamically inserted -->
+            </div>
+
+            <div class="mt-6 bg-white rounded-xl p-6 card-shadow">
+                <div class="flex items-start gap-4">
+                    <span class="text-4xl">💡</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Strategic Headline</h3>
+                        <p class="text-gray-600 text-lg" id="headline-text">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sprint Tracking -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🎯</span>
+                Sprint Tracking (15-Day Launch)
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Sprint Progress</h3>
+                    <canvas id="sprintChart"></canvas>
+                    <div class="mt-4 space-y-2" id="sprint-stats"></div>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Critical Path Items</h3>
+                    <div class="space-y-3" id="critical-path"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Repository Performance -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">⚡</span>
+                Repository & Team Performance
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="repo-cards">
+                <!-- Repository cards will be dynamically inserted -->
+            </div>
+
+            <div class="mt-6 bg-white rounded-xl p-6 card-shadow">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Comparative Analysis</h3>
+                <canvas id="repoComparisonChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Strategic Roadmap -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🗺️</span>
+                Strategic Roadmap Progress
+            </h2>
+
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="strategic-modules">
+                    <!-- Module cards will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+
+        <!-- This Week Completed -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">✅</span>
+                This Week Completed
+            </h2>
+
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="space-y-4" id="week-completed">
+                    <!-- Completed items will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Next 7 Days Plan -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">📅</span>
+                Next 7 Days Plan
+            </h2>
+
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="space-y-4" id="next-week-plan">
+                    <!-- Plan items will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Blockers & Risks -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🚨</span>
+                Blockers & Risks
+            </h2>
+
+            <div class="space-y-4" id="blockers-list">
+                <!-- Blocker cards will be dynamically inserted -->
+            </div>
+        </div>
+
+        <!-- Leadership Insights -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">🎤</span>
+                Leadership Voices
+            </h2>
+
+            <div class="space-y-6" id="leadership-insights">
+                <!-- Insight cards will be dynamically inserted -->
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                <span class="text-4xl">📈</span>
+                Analytics & Trends
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Overall Progress</h3>
+                    <canvas id="overallProgressChart"></canvas>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Weekly Velocity</h3>
+                    <canvas id="velocityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-semibold mb-2">Tudonum Product Execution Intelligence</p>
+            <p class="text-sm opacity-75">Authored by <strong>Awais Mazahir</strong> — Chief Product Officer (CPO)</p>
+            <p class="text-sm opacity-75 mt-2">© 2026 Tudonum - All Rights Reserved</p>
+            <p class="text-xs opacity-50 mt-4">Dashboard v1.0.0 - Generated for Board-Level Strategic Review</p>
+        </div>
+    </footer>
+
+    <script>
+        let dashboardData = null;
+
+        // Load data and initialize dashboard
+        async function loadDashboard() {
+            try {
+                const response = await fetch('dashboard_data.json');
+                dashboardData = await response.json();
+
+                renderDashboard();
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+                alert('Error loading dashboard data. Please ensure dashboard_data.json is available.');
+            }
+        }
+
+        function renderDashboard() {
+            if (!dashboardData) return;
+
+            // Update last updated time
+            const lastUpdated = new Date(dashboardData.meta.generated_at);
+            document.getElementById('last-updated').textContent = lastUpdated.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            renderExecutiveSummary();
+            renderSprintTracking();
+            renderRepositoryPerformance();
+            renderStrategicRoadmap();
+            renderThisWeekCompleted();
+            renderNextWeekPlan();
+            renderBlockersAndRisks();
+            renderLeadershipInsights();
+            renderCharts();
+        }
+
+        function renderExecutiveSummary() {
+            const summary = dashboardData.executive_summary;
+            const meta = dashboardData.meta;
+
+            const cards = [
+                {
+                    title: 'Overall Completion',
+                    value: `${summary.overall_completion}%`,
+                    icon: '🎯',
+                    color: 'from-blue-500 to-blue-600'
+                },
+                {
+                    title: 'Sprint Progress',
+                    value: `${summary.sprint_completion}%`,
+                    icon: '⚡',
+                    color: 'from-blue-600 to-blue-700'
+                },
+                {
+                    title: 'Days Remaining',
+                    value: meta.days_remaining,
+                    icon: '⏰',
+                    color: 'from-orange-500 to-orange-600'
+                },
+                {
+                    title: 'Launch Readiness',
+                    value: summary.launch_readiness,
+                    icon: '🚀',
+                    color: summary.status_color === 'warning' ? 'from-yellow-500 to-orange-500' : 'from-green-500 to-green-600'
+                }
+            ];
+
+            const cardsHTML = cards.map(card => `
+                <div class="bg-gradient-to-br ${card.color} rounded-xl p-6 text-white card-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-4xl">${card.icon}</span>
+                        <span class="text-5xl font-black opacity-20">↗</span>
+                    </div>
+                    <p class="text-sm opacity-90 mb-1">${card.title}</p>
+                    <p class="text-3xl font-black">${card.value}</p>
+                </div>
+            `).join('');
+
+            document.getElementById('executive-cards').innerHTML = cardsHTML;
+            document.getElementById('headline-text').textContent = summary.headline;
+        }
+
+        function renderSprintTracking() {
+            const sprint = dashboardData.sprint_tracking;
+
+            // Sprint statistics
+            const statsHTML = `
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-semibold text-gray-700">Completed</span>
+                    <span class="font-bold text-green-600">${sprint.completed} tasks</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-semibold text-gray-700">In Progress</span>
+                    <span class="font-bold text-blue-600">${sprint.in_progress} tasks</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-semibold text-gray-700">Pending</span>
+                    <span class="font-bold text-orange-600">${sprint.pending} tasks</span>
+                </div>
+                <div class="p-4 ${sprint.on_track ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} border-2 rounded-lg">
+                    <p class="font-semibold ${sprint.on_track ? 'text-green-800' : 'text-red-800'} mb-2">
+                        ${sprint.on_track ? '✅ On Track' : '⚠️ Behind Schedule'}
+                    </p>
+                    <p class="text-sm text-gray-600">${sprint.risk_assessment}</p>
+                </div>
+            `;
+            document.getElementById('sprint-stats').innerHTML = statsHTML;
+
+            // Critical path
+            const criticalPathHTML = sprint.critical_path.map((item, index) => `
+                <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">${index + 1}</span>
+                    <p class="text-gray-700 pt-1">${item}</p>
+                </div>
+            `).join('');
+            document.getElementById('critical-path').innerHTML = criticalPathHTML;
+
+            // Sprint chart
+            const ctx = document.getElementById('sprintChart');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'In Progress', 'Pending'],
+                    datasets: [{
+                        data: [sprint.completed, sprint.in_progress, sprint.pending],
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderRepositoryPerformance() {
+            const repos = dashboardData.repository_performance;
+
+            const getStatusColor = (status) => {
+                const colors = {
+                    'active': 'from-green-500 to-green-600',
+                    'moderate': 'from-blue-500 to-blue-600',
+                    'stagnant': 'from-yellow-500 to-orange-500',
+                    'dead': 'from-red-500 to-red-600'
+                };
+                return colors[status] || 'from-gray-500 to-gray-600';
+            };
+
+            const getHealthEmoji = (health) => {
+                const emojis = {
+                    'excellent': '🚀',
+                    'good': '✅',
+                    'warning': '⚠️',
+                    'critical': '🚨'
+                };
+                return emojis[health] || '❓';
+            };
+
+            const cardsHTML = Object.entries(repos).map(([name, repo]) => `
+                <div class="repo-card bg-white rounded-xl p-6 card-shadow">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">${name.replace('tudonum_', '').replace(/_/g, ' ').toUpperCase()}</h3>
+                            <p class="text-sm text-gray-500">${repo.total_commits} total commits</p>
+                        </div>
+                        <span class="text-3xl">${getHealthEmoji(repo.health)}</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-semibold text-gray-600">Progress</span>
+                            <span class="text-sm font-bold text-blue-600">${repo.progress}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-gradient-to-r ${getStatusColor(repo.status)} h-3 rounded-full progress-bar" style="width: ${repo.progress}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Last 2 Weeks</span>
+                            <span class="font-semibold">${repo.commits_last_2_weeks} commits</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Velocity</span>
+                            <span class="font-semibold capitalize ${repo.velocity === 'high' ? 'text-green-600' : repo.velocity === 'stopped' ? 'text-red-600' : 'text-blue-600'}">${repo.velocity}</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Last Commit</span>
+                            <span class="font-semibold">${repo.last_commit}</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-4">
+                        <p class="text-xs text-gray-500 font-semibold mb-2">Recent Work:</p>
+                        <ul class="space-y-1">
+                            ${repo.key_work.slice(0, 3).map(work => `
+                                <li class="text-xs text-gray-600 flex items-start gap-2">
+                                    <span class="text-blue-500 mt-0.5">▸</span>
+                                    <span>${work}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('repo-cards').innerHTML = cardsHTML;
+
+            // Repository comparison chart
+            const chartData = dashboardData.charts_data.repo_comparison;
+            const ctx = document.getElementById('repoComparisonChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.map(r => r.name),
+                    datasets: [{
+                        label: 'Progress %',
+                        data: chartData.map(r => r.progress),
+                        backgroundColor: chartData.map(r => {
+                            if (r.status === 'excellent') return '#10b981';
+                            if (r.status === 'good') return '#3b82f6';
+                            if (r.status === 'warning') return '#f59e0b';
+                            return '#ef4444';
+                        }),
+                        borderRadius: 8,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderStrategicRoadmap() {
+            const modules = dashboardData.strategic_roadmap.modules;
+
+            const getStatusColor = (status) => {
+                const colors = {
+                    'completed': 'bg-green-100 text-green-800 border-green-300',
+                    'in_progress': 'bg-blue-100 text-blue-800 border-blue-300',
+                    'not_started': 'bg-gray-100 text-gray-800 border-gray-300',
+                    'blocked': 'bg-red-100 text-red-800 border-red-300'
+                };
+                return colors[status] || 'bg-gray-100 text-gray-800';
+            };
+
+            const getStatusIcon = (status) => {
+                const icons = {
+                    'completed': '✅',
+                    'in_progress': '🔄',
+                    'not_started': '⏸️',
+                    'blocked': '🚫'
+                };
+                return icons[status] || '❓';
+            };
+
+            const modulesHTML = Object.entries(modules).map(([key, module]) => `
+                <div class="border-2 ${getStatusColor(module.status)} rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-sm uppercase">${key.replace(/_/g, ' ')}</h4>
+                        <span class="text-2xl">${getStatusIcon(module.status)}</span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                            <div class="bg-gradient-to-r from-blue-600 to-blue-700 h-2 rounded-full" style="width: ${module.progress}%"></div>
+                        </div>
+                        <p class="text-xs font-bold text-right">${module.progress}%</p>
+                    </div>
+                    <p class="text-xs text-gray-600">${module.notes}</p>
+                </div>
+            `).join('');
+
+            document.getElementById('strategic-modules').innerHTML = modulesHTML;
+        }
+
+        function renderThisWeekCompleted() {
+            const completed = dashboardData.this_week_completed;
+
+            const html = completed.map(item => `
+                <div class="flex items-start gap-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                    <span class="text-2xl">✅</span>
+                    <div class="flex-1">
+                        ${item.date ? `<p class="text-sm font-semibold text-green-800 mb-1">${item.date} - ${item.repo}</p>` : ''}
+                        <p class="text-gray-700">${item.achievement || item.note}</p>
+                        ${item.status ? `<p class="text-sm text-orange-600 font-semibold mt-1">Status: ${item.status}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('week-completed').innerHTML = html;
+        }
+
+        function renderNextWeekPlan() {
+            const plan = dashboardData.next_7_days_plan;
+
+            const getPriorityColor = (priority) => {
+                const colors = {
+                    'P0': 'bg-red-100 text-red-800 border-red-300',
+                    'P1': 'bg-orange-100 text-orange-800 border-orange-300',
+                    'P2': 'bg-blue-100 text-blue-800 border-blue-300'
+                };
+                return colors[priority] || 'bg-gray-100 text-gray-800';
+            };
+
+            const html = plan.map(item => `
+                <div class="flex items-start gap-4 p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-blue-300 transition">
+                    <span class="status-badge ${getPriorityColor(item.priority)}">${item.priority}</span>
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-800 mb-1">${item.task}</p>
+                        <div class="flex gap-4 text-sm text-gray-600">
+                            <span>👤 ${item.owner}</span>
+                            <span>📅 Days ${item.days}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('next-week-plan').innerHTML = html;
+        }
+
+        function renderBlockersAndRisks() {
+            const blockers = dashboardData.blockers_and_risks;
+
+            const getSeverityColor = (severity) => {
+                const colors = {
+                    'critical': 'border-red-500 bg-red-50',
+                    'high': 'border-orange-500 bg-orange-50',
+                    'medium': 'border-yellow-500 bg-yellow-50',
+                    'low': 'border-blue-500 bg-blue-50'
+                };
+                return colors[severity] || 'border-gray-500 bg-gray-50';
+            };
+
+            const getSeverityBadge = (severity) => {
+                const badges = {
+                    'critical': 'badge-critical',
+                    'high': 'badge-high',
+                    'medium': 'badge-medium',
+                    'low': 'badge-low'
+                };
+                return badges[severity] || 'badge-medium';
+            };
+
+            const html = blockers.map(blocker => `
+                <div class="border-l-4 ${getSeverityColor(blocker.severity)} rounded-lg p-6 card-shadow">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <span class="status-badge ${getSeverityBadge(blocker.severity)} mb-2">${blocker.severity.toUpperCase()}</span>
+                            <h4 class="text-lg font-bold text-gray-800 mt-2">${blocker.category}</h4>
+                        </div>
+                        <span class="text-3xl">${blocker.severity === 'critical' ? '🚨' : blocker.severity === 'high' ? '⚠️' : '📌'}</span>
+                    </div>
+                    <p class="text-gray-700 font-semibold mb-2">Issue: ${blocker.issue}</p>
+                    <p class="text-gray-600 mb-3"><strong>Impact:</strong> ${blocker.impact}</p>
+                    <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <p class="text-sm font-semibold text-green-700 mb-1">✓ Mitigation Plan:</p>
+                        <p class="text-sm text-gray-700">${blocker.mitigation}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('blockers-list').innerHTML = html;
+        }
+
+        function renderLeadershipInsights() {
+            const insights = dashboardData.leadership_insights;
+
+            const insightTypes = [
+                { key: 'product', icon: '🎯', color: 'insight-product' },
+                { key: 'technology', icon: '⚙️', color: 'insight-technology' },
+                { key: 'engineering', icon: '🔧', color: 'insight-engineering' }
+            ];
+
+            const html = insightTypes.map(type => {
+                const insight = insights[type.key];
+                return `
+                    <div class="insight-card ${type.color} bg-white rounded-xl p-6 card-shadow">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">${type.icon}</span>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-bold text-gray-800 mb-2">${insight.role}</h4>
+                                <p class="text-gray-700 leading-relaxed">${insight.insight}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('leadership-insights').innerHTML = html;
+        }
+
+        function renderCharts() {
+            // Overall Progress Chart
+            const overallData = dashboardData.charts_data.overall_progress_donut;
+            const ctx1 = document.getElementById('overallProgressChart');
+            new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'Remaining'],
+                    datasets: [{
+                        data: [overallData.completed, overallData.remaining],
+                        backgroundColor: ['#2563EB', '#e5e7eb'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Velocity Chart
+            const velocityData = dashboardData.charts_data.sprint_velocity;
+            const ctx2 = document.getElementById('velocityChart');
+            new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: velocityData.map(v => v.week),
+                    datasets: [
+                        {
+                            label: 'Commits',
+                            data: velocityData.map(v => v.commits),
+                            borderColor: '#2563EB',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Features',
+                            data: velocityData.map(v => v.features),
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Export to PDF
+        async function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            // Add title page
+            pdf.setFontSize(24);
+            pdf.setFont(undefined, 'bold');
+            pdf.text('TUDONUM', 105, 40, { align: 'center' });
+
+            pdf.setFontSize(18);
+            pdf.text('Product Execution Intelligence Dashboard', 105, 55, { align: 'center' });
+
+            pdf.setFontSize(14);
+            pdf.setFont(undefined, 'normal');
+            pdf.text('20th Ramzan Launch - Strategic Sprint Tracking', 105, 70, { align: 'center' });
+
+            pdf.setFontSize(12);
+            pdf.text('Authored by: Awais Mazahir', 105, 90, { align: 'center' });
+            pdf.text('Chief Product Officer (CPO), Tudonum', 105, 98, { align: 'center' });
+
+            const date = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            pdf.text(`Generated: ${date}`, 105, 115, { align: 'center' });
+
+            // Add note
+            pdf.setFontSize(10);
+            pdf.setTextColor(100);
+            pdf.text('For detailed charts and interactive data, please view the online dashboard.', 105, 270, { align: 'center' });
+
+            // Add executive summary on second page
+            pdf.addPage();
+            pdf.setFontSize(16);
+            pdf.setFont(undefined, 'bold');
+            pdf.setTextColor(0);
+            pdf.text('Executive Summary', 20, 20);
+
+            pdf.setFontSize(11);
+            pdf.setFont(undefined, 'normal');
+            let yPos = 35;
+
+            pdf.text(`Overall Completion: ${dashboardData.executive_summary.overall_completion}%`, 20, yPos);
+            yPos += 10;
+            pdf.text(`Sprint Completion: ${dashboardData.executive_summary.sprint_completion}%`, 20, yPos);
+            yPos += 10;
+            pdf.text(`Days Remaining: ${dashboardData.meta.days_remaining}`, 20, yPos);
+            yPos += 10;
+            pdf.text(`Launch Readiness: ${dashboardData.executive_summary.launch_readiness}`, 20, yPos);
+            yPos += 15;
+
+            pdf.setFont(undefined, 'italic');
+            const headline = pdf.splitTextToSize(dashboardData.executive_summary.headline, 170);
+            pdf.text(headline, 20, yPos);
+
+            pdf.save('Tudonum_Product_Execution_Dashboard.pdf');
+
+            alert('PDF exported successfully! For full interactive experience with charts, please use the Print Report option.');
+        }
+
+        // Initialize dashboard on page load
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+    </script>
+
+</body>
 </html>
