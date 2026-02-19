@@ -1,6 +1,6 @@
 # Tudonum Product Execution Intelligence Dashboard
 
-**Authored by Awais Mazahir — Chief Product Officer (CPO), Tudonum**
+**Authored By [Tudo Tech Lab](https://tudotechlab.com/)**
 
 ---
 
@@ -314,9 +314,7 @@ All data is pulled from:
 
 For questions or updates to the dashboard:
 
-**Awais Mazahir**
-Chief Product Officer (CPO)
-Tudonum
+**[Tudo Tech Lab](https://tudotechlab.com/)**
 
 ---
 
