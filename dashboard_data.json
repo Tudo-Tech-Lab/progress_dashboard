@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-17T01:30:00Z",
+    "generated_at": "2026-02-24T19:00:00Z",
     "author": "Tudo Tech Lab",
     "title": "",
     "dashboard_version": "1.0.0"
@@ -8,60 +8,60 @@
   "current_sprint": {
     "name": "20th Ramzan Launch",
     "start_date": "2026-02-04",
-    "end_date": "2026-02-20",
-    "days_remaining": 13,
-    "total_days": 15
+    "end_date": "2026-03-19",
+    "days_remaining": 14,
+    "total_days": 25
   },
   "executive_summary": {
-    "strategic_completion": 28,
-    "sprint_completion": 35,
+    "strategic_completion": 33,
+    "sprint_completion": 48,
     "launch_readiness": "MEDIUM RISK",
     "confidence_level": "Medium",
     "status_color": "warning",
-    "headline": "Backend production-ready (78%). Web app strong (72%). Mobile apps need 4-5 weeks more work."
+    "headline": "Development velocity exploded (200+ commits/week). Web React migration 90%. Admin deployed on Vercel. Mobile apps still stalled."
   },
   "sprint_tracking": {
     "total_tasks": 63,
-    "completed": 22,
-    "in_progress": 18,
-    "pending": 23,
-    "completion_percentage": 35,
-    "on_track": false,
-    "risk_assessment": "Mobile development completely stalled. Backend/web on track.",
+    "completed": 30,
+    "in_progress": 20,
+    "pending": 13,
+    "completion_percentage": 48,
+    "on_track": true,
+    "risk_assessment": "Massive acceleration across backend, web, and admin (200+ commits/week). Admin deployed with RBAC + Franchise + service toggles. Web app service display update pending.",
     "critical_path": [
-      "Complete Professional Services booking flow",
-      "Complete Food Delivery ordering flow",
-      "Build Ride Hailing system from scratch",
-      "Merge Admin Dashboard",
-      "Integrate 8+ AI features",
-      "Resume Android & iOS development immediately"
+      "Complete Food Delivery frontend ordering flow",
+      "Finish Web React migration (10% remaining)",
+      "Update services accessibility and display behavior on web app",
+      "Resume mobile app development urgently",
+      "Begin Ride Hailing system implementation",
+      "Implement first batch of AI features"
     ]
   },
   "strategic_roadmap": {
     "total_phases": 6,
     "phases_in_progress": 2,
     "phases_completed": 1,
-    "completion_percentage": 28,
+    "completion_percentage": 33,
     "modules": {
       "infrastructure": {
         "status": "completed",
         "progress": 100,
-        "notes": "Django backend, PostgreSQL + PostGIS, Docker setup complete"
+        "notes": "Django backend, PostgreSQL + PostGIS, Docker setup complete. RBAC and Franchise architecture added."
       },
       "professional_services": {
         "status": "in_progress",
-        "progress": 80,
-        "notes": "Backend complete. Frontend booking flow pending. New packages feature added."
+        "progress": 82,
+        "notes": "Backend complete with KM-based pricing. Frontend booking flow in progress. Packages feature added."
       },
       "food_delivery": {
         "status": "in_progress",
-        "progress": 60,
-        "notes": "Backend models exist. Frontend ordering flow incomplete."
+        "progress": 70,
+        "notes": "Major backend updates + restaurant app created. Frontend user screens actively being developed."
       },
       "ride_hailing": {
         "status": "not_started",
         "progress": 0,
-        "notes": "New vertical. Needs complete implementation."
+        "notes": "New vertical. Still needs complete implementation. 23 days to launch."
       },
       "wallet_payments": {
         "status": "blocked",
@@ -70,121 +70,121 @@
       },
       "admin_dashboard": {
         "status": "in_progress",
-        "progress": 50,
-        "notes": "Auth system active development. Needs merge into main web app."
+        "progress": 75,
+        "notes": "Independently deployed on Vercel. RBAC applied. Franchise model integrated. React migration done. Service toggles built."
       },
       "ai_features": {
         "status": "in_progress",
-        "progress": 20,
-        "notes": "OpenAI client ready. 8+ features need implementation."
+        "progress": 22,
+        "notes": "OpenAI client ready. Minimal actual feature implementation so far. 8+ features still needed."
       },
       "mobile_apps": {
         "status": "stalled",
         "progress": 15,
-        "notes": "Android paused 27 days. iOS essentially not started (2 commits only)."
+        "notes": "Android paused 34 days. iOS paused 25 days. No mobile updates published."
       }
     }
   },
   "repository_performance": {
     "tudonum_backend": {
-      "commits_last_2_weeks": 6,
-      "total_commits": 795,
-      "total_files": 570,
-      "lines_of_code": 28800,
-      "api_endpoints": 217,
+      "commits_last_2_weeks": 31,
+      "total_commits": 821,
+      "total_files": 1067,
+      "lines_of_code": 55332,
+      "api_endpoints": 297,
+      "status": "active",
+      "health": "excellent",
+      "progress": 82,
+      "velocity": "high",
+      "last_commit": "today",
+      "key_work": [
+        "297 API endpoints across 22 Django apps",
+        "New restaurant app with onboarding APIs",
+        "Annexure A admin endpoints implemented",
+        "KM-based pricing for logistics services"
+      ],
+      "team_members": 4,
+      "branches_active": 8
+    },
+    "tudonum_web_app": {
+      "commits_last_2_weeks": 162,
+      "total_commits": 800,
+      "total_files": 1262,
+      "lines_of_code": 62041,
+      "components": 480,
       "status": "active",
       "health": "excellent",
       "progress": 78,
       "velocity": "high",
-      "last_commit": "2 days ago",
+      "last_commit": "today",
       "key_work": [
-        "217 API endpoints (23 Django apps)",
-        "Food Delivery 85% complete",
-        "Professional Services 80% complete",
-        "Multi-currency wallet (4 currencies)"
-      ],
-      "team_members": 8,
-      "branches_active": 4
-    },
-    "tudonum_web_app": {
-      "commits_last_2_weeks": 2,
-      "total_commits": 657,
-      "total_files": 1007,
-      "lines_of_code": 50305,
-      "components": 353,
-      "status": "moderate",
-      "health": "good",
-      "progress": 72,
-      "velocity": "medium",
-      "last_commit": "6 days ago",
-      "key_work": [
-        "353 React components built",
-        "86 pages/routes implemented",
-        "Food & Services UI 75% complete",
-        "Testing framework configured"
+        "480 React components, 87 pages/routes",
+        "Food delivery user & vendor screens in progress",
+        "React Compiler perf optimization (20+ files)",
+        "Web React migration 90% complete (new repo)"
       ],
       "team_members": 7,
-      "branches_active": 30
+      "branches_active": 53
     },
     "tudonum_admin_dashboard": {
-      "commits_last_2_weeks": 6,
-      "total_commits": 10,
-      "total_files": 252,
-      "lines_of_code": 19995,
+      "commits_last_2_weeks": 9,
+      "total_commits": 17,
+      "total_files": 264,
+      "lines_of_code": 20993,
       "pages": 62,
       "status": "active",
-      "health": "good",
-      "progress": 65,
+      "health": "excellent",
+      "progress": 75,
       "velocity": "high",
-      "last_commit": "4 days ago",
+      "last_commit": "1 day ago",
       "key_work": [
-        "62 admin pages implemented",
-        "User/Provider/Order management 70%",
-        "Analytics dashboard 60%",
-        "Auth system complete"
+        "Deployed independently on Vercel",
+        "RBAC + Franchise model + service toggles",
+        "React migration + Dashboard v2",
+        "Service Listings page with filters & pagination"
       ],
       "team_members": 3,
-      "branches_active": 3
+      "branches_active": 6
     },
     "tudonum_ios_app": {
       "commits_last_2_weeks": 0,
       "total_commits": 2,
-      "total_files": 233,
+      "total_files": 395,
       "lines_of_code": 29398,
       "screens": 30,
       "status": "stagnant",
-      "health": "warning",
+      "health": "critical",
       "progress": 45,
       "velocity": "stopped",
-      "last_commit": "18 days ago",
+      "last_commit": "25 days ago",
       "key_work": [
-        "233 Swift files (29K LOC)",
+        "395 tracked files (29K LOC)",
         "30+ screens with UIKit",
         "Booking/Payment flows 60-70%",
-        "Real-time features missing"
+        "Zero activity since Jan 30"
       ],
-      "team_members": 1,
-      "branches_active": 1
+      "team_members": 0,
+      "branches_active": 2
     },
     "tudonum_android_app": {
       "commits_last_2_weeks": 0,
       "total_commits": 100,
-      "total_files": 129,
+      "total_files": 657,
       "lines_of_code": 7968,
       "packages": 8,
       "status": "dead",
       "health": "critical",
       "progress": 40,
       "velocity": "stopped",
-      "last_commit": "27 days ago",
+      "last_commit": "34 days ago",
       "key_work": [
-        "Only 129 files (8K LOC)",
-        "Basic package structure",
-        "Minimal working features",
-        "Architecture incomplete"
+        "657 tracked files (8K LOC)",
+        "Basic package structure exists",
+        "No commits since Jan 21",
+        "Zero active contributors"
       ],
-      "team_members": 6,
-      "branches_active": 3
+      "team_members": 0,
+      "branches_active": 5
     }
   },
   "future_plans": [
@@ -308,77 +308,88 @@
   ],
   "this_week_completed": [
     {
-      "date": "Feb 16",
+      "date": "Feb 24",
       "repo": "Backend",
-      "achievement": "SMTP configuration updates and testing utilities"
+      "achievement": "Restaurant app with onboarding APIs and database schema"
     },
     {
-      "date": "Feb 13",
+      "date": "Feb 24",
+      "repo": "Web App",
+      "achievement": "Food delivery user screens merged (PR #194)"
+    },
+    {
+      "date": "Feb 24",
+      "repo": "Web React",
+      "achievement": "34 commits: staging/prod env switching, CI, testing, code splitting"
+    },
+    {
+      "date": "Feb 23",
       "repo": "Admin Dashboard",
-      "achievement": "Auth refresh mechanism with useAuthRefresh hook"
+      "achievement": "Service Listings page with filters, stats, and pagination"
     },
     {
-      "date": "Feb 12-13",
+      "date": "Feb 23",
       "repo": "Backend",
-      "achievement": "Docker containerization with automated data seeding"
+      "achievement": "Annexure A admin endpoints + Service Listings API"
     },
     {
-      "date": "Feb 11",
-      "repo": "Backend & Web",
-      "achievement": "Service Packages feature - synced implementation across both repos"
+      "date": "Feb 21-22",
+      "repo": "Web App",
+      "achievement": "React Compiler perf optimizations across 20+ files"
     },
     {
-      "note": "Wallet System",
-      "status": "Deactivated awaiting compliance/licensing approval (per update_notes.md)"
+      "date": "Feb 20-21",
+      "repo": "Backend",
+      "achievement": "KM-based pricing for logistics + pricing model update scripts"
     }
   ],
   "next_7_days_plan": [
     {
       "priority": "P0",
-      "task": "URGENT: Resume Android app development - assign dedicated developer",
+      "task": "Complete Food Delivery frontend ordering flow",
+      "owner": "Dev 3",
+      "days": "3-4"
+    },
+    {
+      "priority": "P0",
+      "task": "Finish Web React migration (remaining 10%)",
+      "owner": "Dev Team",
+      "days": "2-3"
+    },
+    {
+      "priority": "P0",
+      "task": "Update services accessibility and display behavior on web app",
+      "owner": "Dev 2",
+      "days": "3-4"
+    },
+    {
+      "priority": "P0",
+      "task": "Resume mobile app development - assign resources",
       "owner": "Engineering Lead",
       "days": "1-2"
     },
     {
-      "priority": "P0",
-      "task": "URGENT: Make iOS development decision - start or deprioritize",
-      "owner": "CTO",
-      "days": "1"
-    },
-    {
-      "priority": "P0",
-      "task": "Complete Professional Services booking flow (frontend)",
-      "owner": "Dev 2",
-      "days": "3-4"
-    },
-    {
-      "priority": "P0",
-      "task": "Complete Food Delivery ordering flow",
+      "priority": "P1",
+      "task": "Complete Restaurant onboarding flow end-to-end",
       "owner": "Dev 3",
-      "days": "4-5"
+      "days": "3-5"
     },
     {
-      "priority": "P0",
-      "task": "Begin Ride Hailing system implementation",
-      "owner": "Dev 4",
+      "priority": "P1",
+      "task": "Implement first 4 AI features across verticals",
+      "owner": "All Devs",
       "days": "5-7"
     },
     {
       "priority": "P1",
-      "task": "Merge Admin Dashboard into main web app",
+      "task": "Professional Services booking flow frontend",
       "owner": "Dev 2",
       "days": "3-4"
     },
     {
-      "priority": "P1",
-      "task": "Resolve Wallet compliance issues and reactivate",
-      "owner": "CPO + Legal",
-      "days": "Ongoing"
-    },
-    {
-      "priority": "P1",
-      "task": "Integrate first 4 AI features across verticals",
-      "owner": "All Devs",
+      "priority": "P2",
+      "task": "Begin Ride Hailing system implementation",
+      "owner": "Dev 4",
       "days": "5-7"
     }
   ],
@@ -386,92 +397,92 @@
     {
       "severity": "critical",
       "category": "Mobile Development",
-      "issue": "Android app completely stalled for 27 days",
-      "impact": "Cannot launch without mobile apps. 20th Ramzan target in jeopardy.",
-      "mitigation": "Immediately assign developer to Android. Daily check-ins required."
+      "issue": "Android stalled 34 days, iOS stalled 25 days - zero contributors",
+      "impact": "Cannot launch without mobile apps. 20th Ramzan target at risk.",
+      "mitigation": "Immediately assign developers or hire contractors for mobile."
     },
     {
       "severity": "critical",
-      "category": "Mobile Development",
-      "issue": "iOS app has only 2 commits - development not started",
-      "impact": "iOS market completely unserved. Brand perception risk.",
-      "mitigation": "Make GO/NO-GO decision on iOS within 24 hours. If GO, hire iOS developer immediately."
+      "category": "Feature Completion",
+      "issue": "Ride Hailing is 0% complete with only 23 days to launch",
+      "impact": "One of three core verticals missing from launch scope.",
+      "mitigation": "Consider MVP: Standard ride type only. No Premium/Shared for v1."
+    },
+    {
+      "severity": "medium",
+      "category": "Franchise Integration",
+      "issue": "Services accessibility and display behavior pending update on web app",
+      "impact": "Admin + backend toggles live. Web app display update needed to complete integration.",
+      "mitigation": "Scheduled alongside Web React migration. Not blocking current sprint."
     },
     {
       "severity": "high",
       "category": "Compliance",
       "issue": "Wallet system deactivated awaiting licensing approval",
       "impact": "Payments across all verticals blocked. Cannot monetize.",
-      "mitigation": "Escalate to legal team. Explore alternative payment integrations (Stripe direct)."
-    },
-    {
-      "severity": "high",
-      "category": "Feature Completion",
-      "issue": "Ride Hailing is 0% complete - needs full build",
-      "impact": "One of three core verticals missing. Launch scope incomplete.",
-      "mitigation": "Consider MVP approach: Standard ride type only. No Premium/Shared for v1."
+      "mitigation": "Escalate to legal. Explore Stripe direct as fallback."
     },
     {
       "severity": "medium",
-      "category": "Integration",
-      "issue": "Admin Dashboard separate from main web app",
-      "impact": "Deployment complexity. User experience fragmentation.",
-      "mitigation": "Week 2 merge planned (Dev 2). Must complete on schedule."
+      "category": "Migration",
+      "issue": "Web React migration at 90% - Next.js app pending deprecation",
+      "impact": "Running two web codebases increases maintenance burden.",
+      "mitigation": "Complete remaining 10% this week. Plan cutover."
     },
     {
       "severity": "medium",
       "category": "AI Features",
-      "issue": "Only infrastructure ready - 8+ features not implemented",
+      "issue": "Only infrastructure ready - 8+ features not yet implemented",
       "impact": "Key differentiator missing. Marketing promise unfulfilled.",
       "mitigation": "Prioritize 4 highest-impact AI features. Defer rest to post-launch."
     },
     {
       "severity": "low",
       "category": "Technical Debt",
-      "issue": "30+ feature branches in web app not merged",
+      "issue": "53+ feature branches in web app need consolidation",
       "impact": "Code organization and merge conflicts potential.",
-      "mitigation": "Scheduled cleanup sprint post-launch."
+      "mitigation": "Consolidate after Web React migration completes."
     }
   ],
   "leadership_insights": {
     "product": {
       "role": "CPO",
-      "insight": "Re-defined development planning into independent verticals with AI-integrated coding and full-stack ownership distributed feature-wise among developers - execution underway for 20th Ramzan Sprint. Backend foundation is rock-solid, but mobile stagnation is existential: we must restart Android immediately and finalize iOS strategy within 48 hours. Wallet compliance is our second-highest priority - without monetization, we have a demo, not a business."
+      "insight": "Strategically prioritizing admin dashboard to offload configuration work (countries, services, franchises) to ops team - freeing developers to focus purely on building logic. Re-defined development into independent verticals with AI-integrated coding and full-stack ownership distributed feature-wise. Transitioning towards a highly scalable architecture for 20th Ramzan Sprint."
     },
     "technology": {
       "role": "CTO",
-      "insight": "Backend and admin dashboard are executing well with Docker containerization complete and auth systems robust. Post-sprint plan: migrate to microservices architecture and React frontend for improved scalability and developer experience. Critical gap: mobile engineering capacity requires immediate resourcing (reassign engineers or bring contractors). Recommend MVP scope reduction on Ride Hailing to improve launch probability."
+      "insight": "Prioritizing microservices architecture starting with notifications and internal messaging systems. Backend and admin dashboard executing well with Docker, RBAC, and auth systems robust. React frontend migration at 90% aligns with the scalable architecture vision. Superadmin and RBAC apps in backend solidify the platform foundation."
     },
     "engineering": {
       "role": "Engineering Lead",
-      "insight": "Team velocity on backend is strong (6 commits/week), but mobile silence is alarming. Android has the foundation (100 commits) - we just need resourcing. iOS is a greenfield problem requiring strategic decision. The Packages feature sync between backend/frontend proves our integration workflow works. Focus areas: 1) Mobile resourcing NOW, 2) AI feature prioritization (implement 4, defer 4), 3) Admin dashboard merge must not slip."
+      "insight": "Development velocity exploded to 200+ commits/week across backend, web, and admin. Web React migration at 90% with 2 developers. Restaurant vertical and superadmin/RBAC apps created in backend. Franchise Architecture live on admin + backend; web app display update queued."
     }
   },
   "charts_data": {
     "overall_progress_donut": {
-      "completed": 28,
-      "remaining": 72
+      "completed": 33,
+      "remaining": 67
     },
     "repo_comparison": [
       {
         "name": "Backend",
-        "progress": 78,
+        "progress": 82,
         "status": "excellent"
       },
       {
         "name": "Web App",
-        "progress": 72,
-        "status": "good"
+        "progress": 78,
+        "status": "excellent"
       },
       {
         "name": "Admin",
-        "progress": 65,
-        "status": "good"
+        "progress": 75,
+        "status": "excellent"
       },
       {
         "name": "iOS",
         "progress": 45,
-        "status": "warning"
+        "status": "critical"
       },
       {
         "name": "Android",
@@ -487,27 +498,27 @@
       },
       {
         "week": "Week 2",
-        "commits": 14,
-        "features": 3
+        "commits": 36,
+        "features": 4
       },
       {
-        "week": "Week 3 (Current)",
-        "commits": 6,
-        "features": 1
+        "week": "Week 3+",
+        "commits": 200,
+        "features": 8
       }
     ],
     "sprint_burndown": {
       "total_story_points": 210,
-      "completed": 73,
-      "remaining": 137,
-      "ideal_remaining": 97
+      "completed": 101,
+      "remaining": 109,
+      "ideal_remaining": 42
     }
   },
   "key_metrics": {
-    "total_commits_all_repos": 1564,
-    "active_developers": 25,
-    "lines_of_code": "~180,000",
-    "api_endpoints": "120+",
+    "total_commits_all_repos": 1774,
+    "active_developers": 12,
+    "lines_of_code": "~260,000",
+    "api_endpoints": "290+",
     "countries_supported": 5,
     "verticals_live": 1,
     "verticals_in_progress": 2,
